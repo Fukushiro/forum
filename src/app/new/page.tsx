@@ -1,5 +1,6 @@
 import { Header } from "@/components/Header";
 import { createPost } from "@/services/api/posts.service";
+import { cookies } from "next/dist/client/components/headers";
 import { redirect } from "next/navigation";
 
 async function registerNewPost(data: FormData) {
@@ -9,12 +10,16 @@ async function registerNewPost(data: FormData) {
   if (text == undefined || title == undefined) {
     return;
   }
-  const {} = createPost({
-    text: text,
-    title: title,
-    user: "0943c808-24bf-4587-9ac5-8667df649b1d",
-  });
-  redirect("/");
+  let value = cookies().get("user")?.value;
+  if (!!value) {
+    let user = JSON.parse(value);
+    const {} = createPost({
+      text: text,
+      title: title,
+      user: user.id,
+    });
+    redirect("/");
+  }
 }
 
 export default function New() {
