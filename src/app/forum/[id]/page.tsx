@@ -9,6 +9,7 @@ interface ForumProps {
 export default async function Forum({ params }: ForumProps) {
   const { id } = params;
   const { data, funcionou, message } = await getPostById({ id });
+  console.log(data);
 
   return (
     <main>
@@ -17,7 +18,7 @@ export default async function Forum({ params }: ForumProps) {
         <div className="w-[70%]  flex flex-col">
           <div className="flex flex-col gap-1 items-center bg-slate-500">
             <p>{data?.title}</p>
-            <p>Autor: autor</p>
+            <p>Autor: {data?.user.username}</p>
           </div>
           <div className="bg-slate-700 overflow-hidden">
             <p className="text-lg p-5 text-start">{data?.text}</p>

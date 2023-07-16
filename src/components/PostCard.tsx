@@ -9,7 +9,7 @@ export default function PostCard({ post }: PostCardProps) {
       <div className="lg:w-[600px] md:w-[500px] sm:w-[400px] w-52  flex flex-col">
         <div className="flex flex-col gap-1 items-center bg-slate-500">
           <p>{post.title}</p>
-          <p>Autor: autor</p>
+          <p>Autor: {post.user.username}</p>
         </div>
         <div className="bg-slate-700 overflow-hidden">
           <p className="text-lg p-5 text-start">{post.text}</p>
