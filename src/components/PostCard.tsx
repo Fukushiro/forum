@@ -12,7 +12,9 @@ export default function PostCard({ post }: PostCardProps) {
           <p>Autor: {post.user.username}</p>
         </div>
         <div className="bg-slate-700 overflow-hidden">
-          <p className="text-lg p-5 text-start">{post.text}</p>
+          <p className="text-lg p-5 text-start break-words max-h-[200px]">
+            {post.text}
+          </p>
         </div>
       </div>
     </Link>

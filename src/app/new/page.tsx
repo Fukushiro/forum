@@ -2,6 +2,8 @@ import { Header } from "@/components/Header";
 import { createPost } from "@/services/api/posts.service";
 import { cookies } from "next/dist/client/components/headers";
 import { redirect } from "next/navigation";
+import { TitleInput } from "./TitleInput";
+import { TextInput } from "./TextInput";
 
 async function registerNewPost(data: FormData) {
   "use server";
@@ -30,8 +32,8 @@ export default function New() {
         action={registerNewPost}
         className=" mx-auto flex flex-col items-center mt-5 gap-4"
       >
-        <div className="flex flex-col gap-4">
-          <div className="flex gap-4">
+        <div className="flex flex-col gap-4 mt-7">
+          {/* <div className="flex gap-4">
             <label htmlFor="title">Title:</label>
             <input
               type="text"
@@ -39,11 +41,14 @@ export default function New() {
               id="title"
               className="w-60 text-black"
             />
-          </div>
+          </div> */}
+          <TitleInput name="title" id="title" />
+          {/* 
           <div className="flex gap-4">
             <label htmlFor="text">Text:</label>
             <textarea name="text" id="text" className="w-60 text-black" />
-          </div>
+          </div> */}
+          <TextInput name="text" id="text" />
           <button
             type="submit"
             className="w-36 border px-5 py-2 hover:bg-white hover:text-slate-600 self-center"
