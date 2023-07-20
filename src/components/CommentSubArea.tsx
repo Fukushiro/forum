@@ -44,7 +44,7 @@ export function CommentSubArea({ comment, layer }: CommentSubAreaProps) {
     action();
   }
   return (
-    <div className="bg-red-800 w-full flex flex-col items-center">
+    <div className="w-full flex flex-col items-center">
       <button
         onClick={() => {
           setUseComments(!openSubComments);
