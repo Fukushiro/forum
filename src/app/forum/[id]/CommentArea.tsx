@@ -80,7 +80,7 @@ export function CommentArea({ idPost }: CommentAreaProps) {
       userId: cookies.user.id,
     });
 
-    setRefresh((value) => !value);
+    // setRefresh((value) => !value);
   }
 
   return (
@@ -88,11 +88,13 @@ export function CommentArea({ idPost }: CommentAreaProps) {
       {/* <div className="flex justify-center mt-5">
         <input type="text" className="bg-transparent" />
       </div> */}
-      <CommentTextField
-        comment={comment}
-        setComment={setComment}
-        handleCommentClick={handleCommentClick}
-      />
+      <div className="flex justify-center">
+        <CommentTextField
+          comment={comment}
+          setComment={setComment}
+          handleCommentClick={handleCommentClick}
+        />
+      </div>
       <div className="flex flex-col items-center gap-4 mt-6">
         {comments.length > 0 ? (
           comments.map((dataComment) => (

@@ -3,6 +3,7 @@ import { getPostComments } from "@/services/api/comments.service";
 import { getPostById } from "@/services/api/posts.service";
 import { CommentCard } from "./CommentCard";
 import { CommentArea } from "./CommentArea";
+import { AuthComponent } from "@/components/AuthComponent";
 
 interface ForumProps {
   params: {
@@ -15,6 +16,7 @@ export default async function Forum({ params }: ForumProps) {
 
   return (
     <main>
+      <AuthComponent />
       <Header />
       <div className="flex justify-center mt-8">
         <div className="w-[70%]  flex flex-col">

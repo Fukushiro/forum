@@ -16,7 +16,7 @@ export function CommentTextField({
     setComment(event.target.value);
   }
   return (
-    <div className="flex flex-row items-center justify-center mt-5 gap-4">
+    <div className="flex flex-row items-center justify-start mt-5 gap-4 w-[500px]">
       <div className="w-72">
         <div className="relative h-11 w-full min-w-[200px]">
           <input
@@ -30,7 +30,7 @@ export function CommentTextField({
           </label>
         </div>
       </div>
-      {comment !== "" ? (
+      {comment !== "" && (
         <button
           className="middle none center rounded-lg bg-pink-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
           data-ripple-light="true"
@@ -40,8 +40,6 @@ export function CommentTextField({
         >
           Comment
         </button>
-      ) : (
-        <></>
       )}
     </div>
   );

@@ -1,5 +1,7 @@
+import { AuthComponent } from "@/components/AuthComponent";
 import { Header } from "@/components/Header";
 import PostCard from "@/components/PostCard";
+import { useAuth } from "@/hooks/useAuth";
 import { getPosts } from "@/services/api/posts.service";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,9 +9,9 @@ import { useEffect, useState } from "react";
 
 export default async function Home() {
   const { data, funcionou } = await getPosts();
-
   return (
     <main>
+      <AuthComponent />
       <Header />
       <section className="flex flex-col gap-4 items-center mt-4">
         <div>
