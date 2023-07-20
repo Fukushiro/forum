@@ -1,4 +1,5 @@
 "use client";
+// Area where is the main comments ands comment field
 import {
   createComment,
   getPostComments,
@@ -9,6 +10,7 @@ import { CommentCard } from "./CommentCard";
 import { useSnackbar } from "notistack";
 import { useCookies } from "react-cookie";
 import { v4 as uuidv4 } from "uuid";
+import { CommentSubArea } from "@/components/CommentSubArea";
 interface CommentAreaProps {
   idPost: string;
 }
@@ -114,10 +116,10 @@ export function CommentArea({ idPost }: CommentAreaProps) {
       <div className="flex flex-col items-center gap-4 mt-6">
         {comments.length > 0 ? (
           comments.map((dataComment) => (
-            <CommentCard
-              username={dataComment.user.username}
-              text={dataComment.text}
+            <CommentSubArea
+              comment={dataComment}
               key={dataComment.id}
+              layer={1}
             />
           ))
         ) : (

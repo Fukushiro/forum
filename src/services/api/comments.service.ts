@@ -37,30 +37,19 @@ export async function createComment({
   text,
   postId,
   userId,
+  parentComment,
 }: {
   text: string;
   userId: string;
   postId: string;
+  parentComment?: string;
 }): Promise<RetornoPadrao<getPostCommentsReturn>> {
   try {
-    // const response = await fetchApi(`/comments`, {
-    //   data: {
-    //     method: "POST",
-    //     body: {
-    //       text: text,
-    //       postId: postId,
-    //       userId: userId,
-    //     },
-    //   },
-    //   type: {
-    //     type: "noStore",
-    //   },
-    // });
-
     const response = await api.post("/comments", {
       text: text,
       postId: postId,
       userId: userId,
+      parentComment: parentComment,
     });
 
     await new Promise((res) => setTimeout(() => res("p1"), 1000)); //load fake
@@ -69,6 +58,35 @@ export async function createComment({
   } catch (e: any) {
     if (e.response.status === 404) {
       return falhaSemRetorno("Falha ao comentar");
+    }
+    return falhaSemRetorno(`${e}`);
+  }
+}
+
+interface getSubCommentsReturn {
+  content: CommentData[];
+}
+export async function getSubComments({
+  idComment,
+}: {
+  idComment: string;
+}): Promise<RetornoPadrao<getSubCommentsReturn>> {
+  try {
+    const response = await fetchApi(`/comments/subcomments/${idComment}`, {
+      data: {
+        method: "GET",
+      },
+      type: {
+        type: "noStore",
+      },
+    });
+
+    // await new Promise((res) => setTimeout(() => res("p1"), 1000)); //load fake
+    const retorno = await response.json();
+    return success({ data: retorno }, "Sucesso");
+  } catch (e: any) {
+    if (e.response.status === 404) {
+      return falhaSemRetorno("Erro ao buscar sub comentarios");
     }
     return falhaSemRetorno(`${e}`);
   }
