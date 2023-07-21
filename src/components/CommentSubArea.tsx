@@ -19,6 +19,7 @@ export function CommentSubArea({ comment, layer }: CommentSubAreaProps) {
   const [subComments, setSubComments] = useState<CommentData[]>([]);
   const [commentString, setCommentString] = useState<string>("");
   const [openCommentField, setOpenCommentField] = useState<boolean>(false);
+  const size = layer * 100;
   useEffect(() => {
     if (!openSubComments) {
       return;
@@ -77,10 +78,17 @@ export function CommentSubArea({ comment, layer }: CommentSubAreaProps) {
     <>
       <div
         className={`flex flex-col items-center ${layer === 1 && "bg-red-700"}
-        ${layer === 2 && "bg-blue-500"} ${layer === 3 && "bg-green-600"}`}
-        style={{
-          marginLeft: layer * 100,
-        }}
+        ${layer === 2 && "bg-blue-500"} ${layer === 3 && "bg-green-600"}
+        ${
+          layer === 1
+            ? "ml-0"
+            : layer === 2
+            ? "ml-[100px]"
+            : layer === 3
+            ? "ml-[200px]"
+            : "ml-[300px]"
+        }
+        `}
       >
         <button
           onClick={() => {
@@ -93,10 +101,16 @@ export function CommentSubArea({ comment, layer }: CommentSubAreaProps) {
       </div>
       {openSubComments && layer < 4 && (
         <div
-          className={`flex flex-row items-center gap-2 w-[820px] h-[70px] `}
-          style={{
-            marginLeft: layer * 100,
-          }}
+          className={`flex flex-row items-center gap-2 w-[820px] h-[70px] 
+          ${
+            layer === 1
+              ? "ml-0"
+              : layer === 2
+              ? "ml-[100px]"
+              : layer === 3
+              ? "ml-[200px]"
+              : "ml-[300px]"
+          }`}
         >
           <button className="" onClick={handleOpenResponseField}>
             Responder
@@ -111,7 +125,7 @@ export function CommentSubArea({ comment, layer }: CommentSubAreaProps) {
           {/* <CommentCard username={comment.user.username} text={comment.text} /> */}
         </div>
       )}
-      {/* <div className="mt-8 ml-[200px]"> */}
+
       <>
         {openSubComments &&
           layer < 4 &&
