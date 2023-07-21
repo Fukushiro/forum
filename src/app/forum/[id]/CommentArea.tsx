@@ -88,7 +88,7 @@ export function CommentArea({ idPost }: CommentAreaProps) {
       {/* <div className="flex justify-center mt-5">
         <input type="text" className="bg-transparent" />
       </div> */}
-      <div className="flex justify-center">
+      <div className="flex justify-center mt-8">
         <CommentTextField
           comment={comment}
           setComment={setComment}

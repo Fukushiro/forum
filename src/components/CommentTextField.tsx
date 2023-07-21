@@ -16,7 +16,7 @@ export function CommentTextField({
     setComment(event.target.value);
   }
   return (
-    <div className="flex flex-row items-center justify-start mt-5 gap-4 w-[500px]">
+    <div className="flex flex-row items-center justify-start  gap-4 w-[500px]">
       <div className="w-72">
         <div className="relative h-11 w-full min-w-[200px]">
           <input

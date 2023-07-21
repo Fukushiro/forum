@@ -73,37 +73,49 @@ export function CommentSubArea({ comment, layer }: CommentSubAreaProps) {
     setOpenCommentField(!openCommentField);
   }
   return (
-    <div className="w-full flex flex-col items-center">
-      <button
-        onClick={() => {
-          setUseComments(!openSubComments);
-        }}
+    <>
+      <div
+        className={`w-full flex flex-col items-center ${
+          layer === 1 && "bg-red-700"
+        }
+        
+        ${layer === 2 && "bg-blue-500"}`}
       >
-        Abrir
-      </button>
-      <CommentCard username={comment.user.username} text={comment.text} />
+        <button
+          onClick={() => {
+            setUseComments(!openSubComments);
+          }}
+        >
+          Abrir
+        </button>
+        <CommentCard username={comment.user.username} text={comment.text} />
+      </div>
       {openSubComments && layer < 4 && (
-        <div className="">
-          <div className="mt-8 ml-[200px]">
-            <button onClick={handleOpenResponseField}>Responder</button>
-            {openCommentField && (
-              <CommentTextField
-                comment={commentString}
-                setComment={setCommentString}
-                handleCommentClick={handlerComment}
-              />
-            )}
-            {/* <CommentCard username={comment.user.username} text={comment.text} /> */}
-            {subComments.map((subComment) => (
-              <CommentSubArea
-                comment={subComment}
-                layer={layer + 1}
-                key={uuidv4()}
-              />
-            ))}
-          </div>
+        <div className=" flex flex-row items-center gap-2 w-[820px] h-[70px]">
+          <button className="" onClick={handleOpenResponseField}>
+            Responder
+          </button>
+          {openCommentField && (
+            <CommentTextField
+              comment={commentString}
+              setComment={setCommentString}
+              handleCommentClick={handlerComment}
+            />
+          )}
+          {/* <CommentCard username={comment.user.username} text={comment.text} /> */}
         </div>
       )}
-    </div>
+      <div className="mt-8 ml-[200px]">
+        {openSubComments &&
+          layer < 4 &&
+          subComments.map((subComment) => (
+            <CommentSubArea
+              comment={subComment}
+              layer={layer + 1}
+              key={uuidv4()}
+            />
+          ))}
+      </div>
+    </>
   );
 }
