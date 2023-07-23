@@ -1,3 +1,5 @@
+import { AUTHORIZATION } from "./api";
+
 export type nextFetchType = "force" | "noStore" | "revalidate";
 interface fetchApiForceCache {
   type: "force";
@@ -30,6 +32,9 @@ function createFetchApi(baseUrl: string) {
   ) {
     let options: RequestInit = {
       method: data.method,
+      headers: {
+        Authorization: AUTHORIZATION,
+      },
     };
     if (!!data.body) {
       options.body = JSON.stringify(data.body);
