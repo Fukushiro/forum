@@ -19,6 +19,7 @@ export function CommentSubArea({ comment, layer }: CommentSubAreaProps) {
   const [subComments, setSubComments] = useState<CommentData[]>([]);
   const [commentString, setCommentString] = useState<string>("");
   const [openCommentField, setOpenCommentField] = useState<boolean>(false);
+  const [refresh, setRefresh] = useState<boolean>(false);
   const size = layer * 100;
   useEffect(() => {
     if (!openSubComments) {
@@ -33,33 +34,33 @@ export function CommentSubArea({ comment, layer }: CommentSubAreaProps) {
       }
     }
     action();
-  }, [openSubComments]);
+  }, [openSubComments, refresh]);
   //   handlers
   function handlerComment() {
     async function action() {
       let commentLet = commentString;
       setCommentString("");
-      setSubComments((value) => [
-        {
-          id: uuidv4(),
-          text: commentLet,
-          user: {
-            id: cookies.user.id,
-            username: cookies.user.username,
-          },
-          post: {
-            createDate: "dsadas",
-            id: comment.id,
-            text: "sadsa",
-            title: "dsadas",
-            user: {
-              id: cookies.user.id,
-              username: cookies.user.username,
-            },
-          },
-        },
-        ...value,
-      ]);
+      // setSubComments((value) => [
+      //   {
+      //     id: uuidv4(),
+      //     text: commentLet,
+      //     user: {
+      //       id: cookies.user.id,
+      //       username: cookies.user.username,
+      //     },
+      //     post: {
+      //       createDate: "dsadas",
+      //       id: comment.id,
+      //       text: "sadsa",
+      //       title: "dsadas",
+      //       user: {
+      //         id: cookies.user.id,
+      //         username: cookies.user.username,
+      //       },
+      //     },
+      //   },
+      //   ...value,
+      // ]);
 
       await createComment({
         postId: comment.post.id,
@@ -67,6 +68,8 @@ export function CommentSubArea({ comment, layer }: CommentSubAreaProps) {
         userId: cookies.user.id,
         parentComment: comment.id,
       });
+
+      setRefresh((oldVal) => !oldVal);
     }
     action();
   }
@@ -90,14 +93,13 @@ export function CommentSubArea({ comment, layer }: CommentSubAreaProps) {
         }
         `}
       >
-        <button
+        <CommentCard
           onClick={() => {
             setUseComments(!openSubComments);
           }}
-        >
-          Abrir
-        </button>
-        <CommentCard username={comment.user.username} text={comment.text} />
+          username={comment.user.username}
+          text={comment.text}
+        />
       </div>
       {openSubComments && layer < 4 && (
         <div

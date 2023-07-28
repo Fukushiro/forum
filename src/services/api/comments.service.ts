@@ -13,18 +13,19 @@ export async function getPostComments({
   idPost: string;
 }): Promise<RetornoPadrao<getPostCommentsReturn>> {
   try {
-    const response = await fetchApi(`/comments/post/${idPost}`, {
-      data: {
-        method: "GET",
-      },
-      type: {
-        type: "noStore",
-      },
-    });
+    // const response = await fetchApi(`/comments/post/${idPost}`, {
+    //   data: {
+    //     method: "GET",
+    //   },
+    //   type: {
+    //     type: "noStore",
+    //   },
+    // });
 
+    const response = await api.get(`/comments/post/${idPost}`);
     await new Promise((res) => setTimeout(() => res("p1"), 1000)); //load fake
-    const retorno = await response.json();
-    return success({ data: retorno }, "Sucesso");
+    // const retorno = await response.json();
+    return success(response, "Sucesso");
   } catch (e: any) {
     if (e.response.status === 404) {
       return falhaSemRetorno("Usuario não encontrado");
@@ -72,18 +73,19 @@ export async function getSubComments({
   idComment: string;
 }): Promise<RetornoPadrao<getSubCommentsReturn>> {
   try {
-    const response = await fetchApi(`/comments/subcomments/${idComment}`, {
-      data: {
-        method: "GET",
-      },
-      type: {
-        type: "noStore",
-      },
-    });
+    // const response = await fetchApi(`/comments/subcomments/${idComment}`, {
+    //   data: {
+    //     method: "GET",
+    //   },
+    //   type: {
+    //     type: "noStore",
+    //   },
+    // });
+    const response = await api.get(`/comments/subcomments/${idComment}`);
 
     // await new Promise((res) => setTimeout(() => res("p1"), 1000)); //load fake
-    const retorno = await response.json();
-    return success({ data: retorno }, "Sucesso");
+    // const retorno = await response.json();
+    return success(response, "Sucesso");
   } catch (e: any) {
     if (e.response.status === 404) {
       return falhaSemRetorno("Erro ao buscar sub comentarios");

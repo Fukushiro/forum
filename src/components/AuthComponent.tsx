@@ -3,6 +3,6 @@
 import { useAuth } from "@/hooks/useAuth";
 
 export function AuthComponent() {
-  useAuth();
+  useAuth({});
   return <></>;
 }

@@ -2,10 +2,11 @@
 interface CommentCardProps {
   username: string;
   text: string;
+  onClick: () => void;
 }
-export function CommentCard({ text, username }: CommentCardProps) {
+export function CommentCard({ text, username, onClick }: CommentCardProps) {
   return (
-    <div className="flex flex-row bg-slate-700  w-[820px] ">
+    <div className="flex flex-row bg-slate-700  w-[820px] " onClick={onClick}>
       <div className="flex flex-col gap-1 items-center bg-slate-500 justify-center w-[10%]">
         <p>{username}</p>
       </div>

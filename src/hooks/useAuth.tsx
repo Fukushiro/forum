@@ -2,11 +2,17 @@
 import { useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useRouter } from "next/navigation";
-export function useAuth() {
+interface useAuthProps {
+  notCheckForAuth?: boolean;
+}
+export function useAuth({ notCheckForAuth }: useAuthProps) {
   // hooks
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
   const { push } = useRouter();
   useEffect(() => {
+    if (notCheckForAuth) {
+      return;
+    }
     console.log("Check auth");
     console.log(cookies.user);
 
@@ -15,5 +21,11 @@ export function useAuth() {
       return;
     }
   }, []);
-  return {};
+  function logout() {
+    console.log("LOGOUT");
+    removeCookie("user");
+    push("/login");
+  }
+
+  return { logout };
 }

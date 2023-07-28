@@ -5,17 +5,24 @@ import {
   getPostComments,
 } from "@/services/api/comments.service";
 import { CommentData } from "@/types/comment.types";
-import { ChangeEvent, useEffect, useState } from "react";
+import {
+  ChangeEvent,
+  DetailedHTMLProps,
+  HTMLAttributes,
+  useEffect,
+  useState,
+} from "react";
 import { CommentCard } from "./CommentCard";
 import { useSnackbar } from "notistack";
 import { useCookies } from "react-cookie";
 import { v4 as uuidv4 } from "uuid";
 import { CommentSubArea } from "@/components/CommentSubArea";
 import { CommentTextField } from "@/components/CommentTextField";
-interface CommentAreaProps {
+interface CommentAreaProps
+  extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   idPost: string;
 }
-export function CommentArea({ idPost }: CommentAreaProps) {
+export function CommentArea({ idPost, ...rest }: CommentAreaProps) {
   // hooks
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const [cookies, setCookie, removeCookie] = useCookies(["user"]);
@@ -52,27 +59,27 @@ export function CommentArea({ idPost }: CommentAreaProps) {
     // text={dataComment.text}
     // key={dataComment.id}
 
-    setComments((value) => [
-      {
-        id: uuidv4(),
-        text: commentLet,
-        user: {
-          id: cookies.user.id,
-          username: cookies.user.username,
-        },
-        post: {
-          createDate: "dsadas",
-          id: idPost,
-          text: "sadsa",
-          title: "dsadas",
-          user: {
-            id: cookies.user.id,
-            username: cookies.user.username,
-          },
-        },
-      },
-      ...value,
-    ]);
+    // setComments((value) => [
+    //   {
+    //     id: uuidv4(),
+    //     text: commentLet,
+    //     user: {
+    //       id: cookies.user.id,
+    //       username: cookies.user.username,
+    //     },
+    //     post: {
+    //       createDate: "dsadas",
+    //       id: idPost,
+    //       text: "sadsa",
+    //       title: "dsadas",
+    //       user: {
+    //         id: cookies.user.id,
+    //         username: cookies.user.username,
+    //       },
+    //     },
+    //   },
+    //   ...value,
+    // ]);
 
     await createComment({
       postId: idPost,
@@ -80,11 +87,11 @@ export function CommentArea({ idPost }: CommentAreaProps) {
       userId: cookies.user.id,
     });
 
-    // setRefresh((value) => !value);
+    setRefresh((value) => !value);
   }
 
   return (
-    <div>
+    <div {...rest}>
       {/* <div className="flex justify-center mt-5">
         <input type="text" className="bg-transparent" />
       </div> */}

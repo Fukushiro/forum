@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
 import { useSnackbar } from "notistack";
+import { TextInput } from "@/components/TextInput";
 
 export function LoginForm() {
   // useStates
@@ -40,25 +41,37 @@ export function LoginForm() {
     }
   }
 
+  useEffect(() => {
+    console.log(username);
+  }, [username]);
+
   return (
     <div className="w-[500px] h-[500px] flex flex-col items-center gap-3">
       <h1>Login</h1>
-      <input
-        type="text"
-        className="text-black"
-        value={username}
-        onChange={(event) => {
-          setUsername(event.target.value);
+
+      <TextInput
+        label="Username"
+        unmanaged={{
+          name: "name",
+        }}
+        manage={{
+          value: username,
+          setValue: setUsername,
         }}
       />
-      <input
-        type="password"
-        className="text-black"
-        value={password}
-        onChange={(event) => {
-          setPassword(event.target.value);
+
+      <TextInput
+        label="Password"
+        unmanaged={{
+          name: "password",
         }}
+        manage={{
+          value: password,
+          setValue: setPassword,
+        }}
+        variant="password"
       />
+
       <button
         onClick={() => {
           console.log("Entrou");
