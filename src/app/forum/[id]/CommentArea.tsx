@@ -95,14 +95,14 @@ export function CommentArea({ idPost, ...rest }: CommentAreaProps) {
       {/* <div className="flex justify-center mt-5">
         <input type="text" className="bg-transparent" />
       </div> */}
-      <div className="flex justify-center mt-8">
+      <div className="flex  mt-8">
         <CommentTextField
           comment={comment}
           setComment={setComment}
           handleCommentClick={handleCommentClick}
         />
       </div>
-      <div className="flex flex-col items-center gap-4 mt-6">
+      <div className="flex flex-col gap-4 mt-6">
         {comments.length > 0 ? (
           comments.map((dataComment) => (
             <CommentSubArea

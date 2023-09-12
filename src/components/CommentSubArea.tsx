@@ -3,7 +3,7 @@
 import { CommentCard } from "@/app/forum/[id]/CommentCard";
 import { createComment, getSubComments } from "@/services/api/comments.service";
 import { CommentData } from "@/types/comment.types";
-import { useState, useEffect } from "react";
+import { useState, useEffect, DetailedHTMLProps, HTMLAttributes } from "react";
 import { CommentTextField } from "./CommentTextField";
 import { useCookies } from "react-cookie";
 import { v4 as uuidv4 } from "uuid";
@@ -80,7 +80,7 @@ export function CommentSubArea({ comment, layer }: CommentSubAreaProps) {
   return (
     <>
       <div
-        className={`flex flex-col items-center ${layer === 1 && "bg-red-700"}
+        className={`flex flex-col  ${layer === 1 && "bg-red-700"}
         ${layer === 2 && "bg-blue-500"} ${layer === 3 && "bg-green-600"}
         ${
           layer === 1
@@ -91,6 +91,7 @@ export function CommentSubArea({ comment, layer }: CommentSubAreaProps) {
             ? "ml-[200px]"
             : "ml-[300px]"
         }
+        
         `}
       >
         <CommentCard

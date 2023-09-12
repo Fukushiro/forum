@@ -30,7 +30,9 @@ export default async function Forum({ params }: ForumProps) {
         </div>
       </div>
       {/* comment area */}
-      <CommentArea idPost={id} />
+      <div className="flex justify-center">
+        <CommentArea idPost={id} className=" w-[60%]" />
+      </div>
     </main>
   );
 }
