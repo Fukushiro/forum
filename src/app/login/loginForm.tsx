@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { useCookies } from "react-cookie";
 import { useSnackbar } from "notistack";
 import { TextInput } from "@/components/TextInput";
+import { Button } from "@/components/Button";
 
 export function LoginForm() {
   // useStates
@@ -72,16 +73,25 @@ export function LoginForm() {
         variant="password"
       />
 
-      <button
+      <Button
+        text="Logar"
         onClick={() => {
           console.log("Entrou");
 
           submit({ username, password });
         }}
-        className="bg-white text-black px-8 py-2 "
-      >
-        Logar
-      </button>
+        className="w-60"
+      />
+
+      <Button
+        text="Cadastrar"
+        onClick={() => {
+          console.log("Entrou");
+
+          submit({ username, password });
+        }}
+        className="w-60"
+      />
     </div>
   );
 }

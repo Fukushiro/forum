@@ -13,6 +13,9 @@ export function CommentCard({ text, username, onClick }: CommentCardProps) {
       <div className="bg-slate-70 flex ">
         <p className="text-lg p-5 text-start break-words  ">
           {text}
+          Most words are short & don't need to break. But
+          Antidisestablishmentarianism is long. The width is set to min-content,
+          with a max-width of 11em.
         </p>
       </div>
     </div>
